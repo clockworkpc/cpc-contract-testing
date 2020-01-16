@@ -20,7 +20,7 @@ app.use( bodyParser.json() );
 routes( app );
 
 app.get( '/', ( req, res ) =>
-  res.send( `Node and Express server running on port ${PORT}` )
+  res.send( `Welcome to the virtual MongoDB library on ${PORT}` )
 );
 
 app.listen( PORT, () =>

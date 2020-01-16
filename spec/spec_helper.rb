@@ -17,6 +17,8 @@ require 'cpc/util/time_stamp_util'
 require 'cpc/util/util'
 
 require 'contractor/set_up_project'
+require 'contractor/library'
+# require 'contractor/librarian'
 
 
 RSpec.configure do |config|
