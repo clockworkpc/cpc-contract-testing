@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/clockworkpc/cpc-ruby.git
-  revision: 364e66b67cdc210b1e2ce0bf67f5bacfff27b51f
+  revision: 61877d4152c05df87f00d967f111cc33968b48f6
   specs:
-    cpc (18.1.15)
+    cpc (18.1.17)
       activesupport
       clipboard
       csv

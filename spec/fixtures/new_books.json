@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Hello, World!",
+    "author": "Foo Bar III"
+  },
+  {
+    "title": "Hello, World, Again!",
+    "author": "Foo Bar III"
+  },
+  {
+    "title": "So Long, World!",
+    "author": "Foo Bar III"
+  },
+  {
+    "title": "Make Mongo, Not SQL!",
+    "author": "D. B. C. Quell"
+  },
+  {
+    "title": "No True Scotsman",
+    "author": "Hamish MacDonald"
+  },
+  {
+    "title": "World, I'm back!",
+    "author": "Foo Bar III"
+  }
+]

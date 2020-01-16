@@ -10,10 +10,6 @@ export const BookSchema = new Schema( {
     type: String,
     required: 'Enter the name of the author'
   },
-  quantity: {
-    type: Number,
-    default: 1
-  },
   checkedIn: {
     type: Date,
     default: Date.now
