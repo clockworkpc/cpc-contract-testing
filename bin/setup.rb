@@ -8,8 +8,8 @@ class ProjectRenamer
     project_details_hsh = JSON.parse(File.read(@project_details_path))
     @old_module_str = project_details_hsh["module"]
     @old_spec_str = project_details_hsh["spec"]
-    @new_module_str = 'RubyTemplate'
-    @new_spec_str = 'ruby_template'
+    @new_module_str = 'Contractor'
+    @new_spec_str = 'contractor'
   end
 
   def grep_spec_module

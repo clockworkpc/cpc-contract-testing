@@ -1,6 +1,6 @@
-RSpec.describe RubyTemplate::SetUpProject do
+RSpec.describe Contractor::SetUpProject do
 
-  context 'ruby_template' do
+  context 'contractor' do
     let(:project_details) { JSON.parse(File.read('bin/project_details.json')) }
 
     it "should match the project Module name" do

@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    ruby_template (0.1.0)
+    contractor (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -97,12 +97,12 @@ DEPENDENCIES
   bundler (~> 2.0)
   cpc!
   facets
-  ruby_template!
   guard
   guard-rspec
   guard-rubocop
   rake (~> 10.0)
   rspec (~> 3.0)
+  contractor!
   tzinfo (~> 1.2)
   tzinfo-data
   wdm (~> 0.1.1)

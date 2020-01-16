@@ -1,4 +1,4 @@
-module RubyTemplate
+module Contractor
   class SetUpProject
     def project_details
       JSON.parse(File.read('bin/project_details.json'))

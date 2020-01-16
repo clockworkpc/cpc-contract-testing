@@ -16,7 +16,7 @@ require 'cpc/util/string_util'
 require 'cpc/util/time_stamp_util'
 require 'cpc/util/util'
 
-require 'ruby_template/set_up_project'
+require 'contractor/set_up_project'
 
 
 RSpec.configure do |config|
