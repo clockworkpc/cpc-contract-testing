@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-RSpec.describe Contractor::Library do
+RSpec.describe Contractor::CpcLibrary do
   context 'Node and Express on Port 4000', online: true do
     url = 'http://localhost'
     port = 4001
-    subject = Contractor::Library.new(url, port)
+    subject = Contractor::CpcLibrary.new(url, port)
 
     new_book_hsh = {
       title: 'Hello, World!',
@@ -23,8 +23,16 @@ RSpec.describe Contractor::Library do
     it 'should get root page' do
       res = subject.get_root
       expect(res.code).to eq(200)
-      expect(res.body).to eq('Node and Express server running on port 4000')
+      expect(res.body).to eq("Welcome to the CPC Library on MongoDB, available at Port #{port}")
       expect(res.headers['x-powered-by']).to eq('Express')
+    end
+
+    it 'should add a new book to the CpcLibrary collection' do
+      res = subject.add_new_book(new_book_hsh)
+      expect(res.code).to eq(200)
+      expect(res.body['title']).to eq(new_book_hsh[:title])
+      expect(res.body['author']).to eq(new_book_hsh[:author])
+      expect(res.body['quantity']).to eq(new_book_hsh[:quantity])
     end
 
     # it 'should POST a new contact' do

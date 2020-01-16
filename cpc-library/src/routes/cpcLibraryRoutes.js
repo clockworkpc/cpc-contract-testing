@@ -4,7 +4,7 @@ import {
   getBookWithID,
   updateBook,
   deleteBook
-} from '../controllers/libraryController';
+} from '../controllers/cpcLibraryController';
 
 const routes = ( app ) => {
   app.route( '/book' )

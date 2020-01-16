@@ -1,5 +1,5 @@
 import express from 'express';
-import routes from './src/routes/libraryRoutes';
+import routes from './src/routes/cpcLibraryRoutes';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
@@ -8,7 +8,7 @@ const PORT = 4001;
 
 // mongoose connection
 mongoose.Promise = global.Promise;
-mongoose.connect( 'mongodb://localhost/CRMdb', {
+mongoose.connect( 'mongodb://localhost/LIBRARYdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 } );
@@ -20,9 +20,9 @@ app.use( bodyParser.json() );
 routes( app );
 
 app.get( '/', ( req, res ) =>
-  res.send( `Welcome to the virtual MongoDB library on ${PORT}` )
+  res.send( `Welcome to the CPC Library on MongoDB, available at Port ${PORT}` )
 );
 
 app.listen( PORT, () =>
-  console.log( `Your server is running on port ${PORT}` )
+  console.log( `CPC Library server is running on port ${PORT}` )
 );

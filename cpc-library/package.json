@@ -4,7 +4,7 @@
   "description": "Library",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js"
+    "start": "DEBUG=express nodemon ./index.js --exec babel-node -e js"
   },
   "repository": {
     "type": "git",

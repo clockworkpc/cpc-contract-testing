@@ -4,7 +4,6 @@ require 'pry'
 require 'time'
 
 require 'cpc/codewars/drying_potatoes'
-
 require 'cpc/util/api_util'
 require 'cpc/util/case_util'
 require 'cpc/util/collection_util'
@@ -17,7 +16,7 @@ require 'cpc/util/time_stamp_util'
 require 'cpc/util/util'
 
 require 'contractor/set_up_project'
-require 'contractor/library'
+require 'contractor/cpc_library'
 # require 'contractor/librarian'
 
 

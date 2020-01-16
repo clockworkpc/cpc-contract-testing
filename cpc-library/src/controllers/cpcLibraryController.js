@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import {
   BookSchema
 }
-from '../models/libraryModel';
+from '../models/cpcLibraryModel';
 
 const Book = mongoose.model( 'Book', BookSchema );
 

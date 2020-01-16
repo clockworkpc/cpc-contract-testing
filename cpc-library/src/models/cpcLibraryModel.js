@@ -27,26 +27,3 @@ export const BookSchema = new Schema( {
     default: null
   }
 } );
-
-
-// christianName: {
-//   type: String,
-//   required: 'Enter a Christian name'
-// },
-// surname: {
-//   type: String,
-//   required: 'Enter a surname'
-// },
-// email: {
-//   type: String
-// },
-// company: {
-//   type: String
-// },
-// phone: {
-//   type: Number
-// },
-// created_date: {
-//   type: Date,
-//   default: Date.now
-// }
