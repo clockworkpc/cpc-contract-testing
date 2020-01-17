@@ -1,2 +1,4 @@
 # rspec failure tracking
 .rspec_status
+cpc-library/node_modules/
+cpc-librarian/node_modules/

@@ -4,7 +4,7 @@ This is a template for a personal Ruby gem project that is boosted by the Classe
 
 ## Getting Started
 
-1. Edit and rename `ruby_template.gemspec` according to your needs.
+1. Edit and rename `contractor.gemspec` according to your needs.
 1. Execute the customised script `bin/setup`.
 
 This will do the following:

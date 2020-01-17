@@ -4,7 +4,6 @@ require 'pry'
 require 'time'
 
 require 'cpc/codewars/drying_potatoes'
-
 require 'cpc/util/api_util'
 require 'cpc/util/case_util'
 require 'cpc/util/collection_util'
@@ -16,7 +15,9 @@ require 'cpc/util/string_util'
 require 'cpc/util/time_stamp_util'
 require 'cpc/util/util'
 
-require 'ruby_template/set_up_project'
+require 'contractor/set_up_project'
+require 'contractor/cpc_library'
+# require 'contractor/librarian'
 
 
 RSpec.configure do |config|
