@@ -1,5 +1,5 @@
 import express from 'express';
-import routes from './src/routes/crmRoutes';
+import routes from './src/routes/cpcLibrarianRoutes';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
@@ -20,7 +20,7 @@ app.use( bodyParser.json() );
 routes( app );
 
 app.get( '/', ( req, res ) =>
-  res.send( `Node and Express server running on port ${PORT}` )
+  res.send( `Welcome to the CPC Librarian on MongoDB, available at Port ${PORT}` )
 );
 
 app.listen( PORT, () =>

@@ -17,7 +17,7 @@ require 'cpc/util/util'
 
 require 'contractor/set_up_project'
 require 'contractor/cpc_library'
-# require 'contractor/librarian'
+require 'contractor/cpc_librarian'
 
 
 RSpec.configure do |config|
