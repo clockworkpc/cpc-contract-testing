@@ -26,6 +26,27 @@ RSpec.describe Contractor::CpcLibrarian do
       expect(res.headers['x-powered-by']).to eq('Express')
     end
 
+    it 'should GET all the books in the CPCLibrarian collection' do
+      res = subject.get_all_books
+      expect(res.code).to eq(200)
+      expect(res.body[0]['title']).to eq(new_book_hsh[:title])
+      expect(res.body[0]['author']).to eq(new_book_hsh[:author])
+      expect(res.body.length).to eq(6)
+    end
+    
+    it 'should GET book by ID' do
+      first_book_hsh = subject.get_all_books.body[0]
+      bookID_str = first_book_hsh['_id']
+      title = first_book_hsh['title']
+      author = first_book_hsh['author']
+      res = subject.get_book_by_id(bookID_str)
+      expect(res.code).to eq(200)
+      expect(res.body['title']).to eq(title)
+      expect(res.body['author']).to eq(author)
+      puts res.body
+    end
+
+
     # it 'should POST a new book to the CpcLibrarian collection' do
     #   res = subject.post_book(new_book_hsh)
     #   expect(res.code).to eq(200)
@@ -39,13 +60,6 @@ RSpec.describe Contractor::CpcLibrarian do
     #   expect(res.count).to eq(book_hsh_ary.count)
     # end
     #
-    # it 'should GET all the books in the CPCLibrarian collection' do
-    #   res = subject.get_all_books
-    #   expect(res.code).to eq(200)
-    #   expect(res.body[0]['title']).to eq(new_book_hsh[:title])
-    #   expect(res.body[0]['author']).to eq(new_book_hsh[:author])
-    #   expect(res.body.count).to eq(7)
-    # end
     #
     # it 'should DELETE the latest book in the collection' do
     #   protected_id_ary = ['5e20e90380c9c830e74c6335']
@@ -61,7 +75,7 @@ RSpec.describe Contractor::CpcLibrarian do
     #   expect(res.body['id']).to eq(id_to_delete)
     #   expect(subject.get_all_books.body.count).to eq(all_books.count - 1)
     # end
-    #
+
     # it 'should GET a book by ID' do
     #   book_hsh_ary = JSON.parse(File.read(new_books_json_path))
     #   last_book_hsh = book_hsh_ary[-2]
@@ -72,6 +86,7 @@ RSpec.describe Contractor::CpcLibrarian do
     #   expect(res.body['title']).to eq(last_book_hsh['title'])
     #   expect(res.body['author']).to eq(last_book_hsh['author'])
     # end
+    #
     #
     # it 'should PUT a book by ID' do
     #   book_hsh_ary = JSON.parse(File.read(new_books_json_path))

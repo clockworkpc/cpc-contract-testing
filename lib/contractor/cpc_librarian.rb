@@ -19,10 +19,10 @@ module Contractor
       api_get_request(args_hsh)
     end
 
-    # def get_book_by_id(bookID_str)
-    #   args_hsh = { url: { host: @host, path: 'book', _id: bookID_str } }
-    #   api_get_request(args_hsh)
-    # end
+    def get_book_by_id(bookID_str)
+      args_hsh = { url: { host: @host, path: 'book', _id: bookID_str } }
+      api_get_request(args_hsh)
+    end
     #
     # def get_latest_book
     #   all_books = get_all_books.body.last
