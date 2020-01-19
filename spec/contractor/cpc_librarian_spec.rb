@@ -33,7 +33,7 @@ RSpec.describe Contractor::CpcLibrarian do
       expect(res.body[0]['author']).to eq(new_book_hsh[:author])
       expect(res.body.length).to eq(6)
     end
-    
+
     it 'should GET book by ID' do
       first_book_hsh = subject.get_all_books.body[0]
       bookID_str = first_book_hsh['_id']

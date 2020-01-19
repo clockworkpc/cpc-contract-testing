@@ -5,3 +5,4 @@ wmctrl -ic $(wmctrl -l | grep 'CPC-LIBRARY' | cut -c 1-10)
 wmctrl -ic $(wmctrl -l | grep 'CPC-LIBRARIAN' | cut -c 1-10)
 killall -9 node
 sudo systemctl stop mongod
+sudo systemctl status mongod
