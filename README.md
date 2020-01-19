@@ -44,18 +44,41 @@ RESPONSE: Library => Librarian => Client
 ### Basic Example: Is A Book Available To Borrow?
 
 1. Library Member visits the Librarian website, and in the search form,
-   1. types in the **Book Title** field the title "Hello, World!"
-   1. types in the **Author** field the name "Foo Bar III",
+   1. types the title "Hello, World!" in the **Book Title** field,
+   1. types the name "Foo Bar III" in the **Author** field the name,
    1. and clicks **Search**, to see whether it is available. **[1]**
 
-1. The UI sends an API call to the Express server `cpc-librarian` on port **4002**: `POST http://localhost:4002/book/request/available ({author: "Foo Bar III", title: "Hello, World!"})`
+1. The UI sends an API call to the Express server `cpc-librarian` on port **4002**:
+
+```
+      POST http://localhost:4002/book/request/available (
+        {
+          author: "Foo Bar III",
+          title: "Hello, World!"
+        }
+      )
+```
+
 1. `cpc-librarian` then performs the following actions:
    1. `GET`s **all** the library books in the collection from the **CPC Library** Express server on Port **4001**:
       - `GET http://localhost:4001/book/`
-      - Receives **GET Response 200** (if any books exist in the DB)
-   1. Identifies the `_id` of the first **available** copy, i.e. which matches **author** and **title** WHERE `available === true`.
-   1. Returns the details of the book in the body of the **GET response**.
-1. The front end will process this response and display it to the end-user.
+      - `GET Response 200` (if any books exist in the DB)
+   1. Identifies the `_id` of the first **available** copy:
+      1. `available === true`
+      2. `author === "Foo Bar III"`
+      3. `title === "Hello, World!"`
+
+   1. Returns the details of the book in the JSON body of the **GET response**:
+```
+      GET Response 200 (
+        {
+          _id: 12345789,
+          author: "Foo Bar III",
+          title: "Hello, World!"
+        }
+      )
+```
+1. The front end will then process this response and display it to the end-user.
 
 **[1]** This is simulated in RSpec by the method call `CpcLibrarian.get_book_by_author_title('Foo Bar III', 'Hello, World!')`.
 
@@ -66,12 +89,49 @@ RESPONSE: Library => Librarian => Client
    1. sees that it is available,
    1. and clicks "Borrow" **[2]**
 1. The UI sends an API call to the Express server `cpc-librarian` on port **4002**:
-   - `POST http://localhost:4002/book/request/borrow ( {_id: 123456789} )`
+
+   `POST http://localhost:4002/book/request/borrow ( {_id: 123456789} )`
+
 1. `cpc-librarian` then performs the following actions:
-   1. Sends a request to the **CPC Library** Express server on port **4001** to *modify* the entry for the book in the database:
-      - `PATCH http://localhost:4001/book ({ id_: 123456789, available: false, checkedOut: TODAY(), Due: TODAY()+14 })`
-      - Receive **PATCH Response 200** (if request successful)
-   1. Returns the details of the book, including the **Due Date** in the **POST response**.
-1. The front end will process this response and display it to the end-user.
+
+Sends a request to the **CPC Library** Express server on port **4001** to *modify* the entry for the book in the database:
+
+```
+      PATCH http://localhost:4001/book (
+        {
+          id_: 123456789,
+          available: false,
+          checkedOut: TODAY(),
+          Due: TODAY()+14
+        }
+      )
+```
+  `PATCH Response 200` (if request successful):
+```
+      PATCH Response 200 (
+        {
+          id_: 123456789,
+          author: "Foo Bar III",
+          title: "Hello, World!",
+          available: false,
+          checkedOut: TODAY(),
+          Due: TODAY()+14
+        }
+      )
+```
+Returns the details of the book, including the **Due Date** in the **POST response**, but excluding the `available: false` key-value pair, as that pertains to the DB, not the end-user:
+
+```
+      POST Response 200 (
+        {
+          id_: 123456789,
+          author: "Foo Bar III",
+          title: "Hello, World!",
+          checkedOut: TODAY(),
+          Due: TODAY()+14
+        }
+      )
+```
+4. The front end will process this response and display it to the end-user.
 
 **[2]** This is simulated in RSpec by the method call CpcLibrarian.borrow_book({ BOOK_ID })
