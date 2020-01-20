@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'facets'
+require 'faraday'
 require 'pry'
 require 'time'
 

@@ -2,7 +2,7 @@ import {
   // addnewBook,
   getBooks,
   getBookWithID,
-  getBooksByAuthor
+  requestBooksByAuthor
   // updateBook,
   // deleteBook
 } from '../controllers/cpcLibrarianController';
@@ -21,7 +21,7 @@ const routes = (app) => {
   //   res.send('DELETE request successful!'));
 
   app.route('/book/request/available')
-    .get(getBooksByAuthor);
+    .post(requestBooksByAuthor);
 }
 
 export default routes;

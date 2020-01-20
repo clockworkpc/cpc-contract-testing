@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'cpc'
+require 'faraday'
 
 module Contractor
   class CpcLibrarian
@@ -10,38 +11,23 @@ module Contractor
     end
 
     def get_root
-      args_hsh = { url: { host: @host } }
-      api_get_request(args_hsh)
+      Faraday.get(@host)
     end
 
     def get_all_books
-      args_hsh = { url: { host: @host, path: 'book' } }
-      api_get_request(args_hsh)
+      url = [@host, 'book'].join('/')
+      Faraday.get(url)
     end
 
     def get_book_by_id(bookID_str)
-      args_hsh = { url: { host: @host, path: 'book', _id: bookID_str } }
-      api_get_request(args_hsh)
+      url = [@host, 'book', bookID_str].join('/')
+      Faraday.get(url)
     end
 
-    def get_books_by_author_a(author_str)
-      book_hsh_ary = get_all_books
-      book_hsh_ary.body.select { |book_hsh| book_hsh['author'].eql?(author_str) }
-    end
-
-    def get_books_by_author(author_str)
-      args_hsh = {
-        url: { host: @host, path: 'book', action: 'request', type: 'available' },
-        request_body: { author: author_str }
-      }
-
-      api_get_request(args_hsh).body
-      #
-      #
-      #
-      #
-      # book_hsh_ary = get_all_books
-      # book_hsh_ary.body.select { |book_hsh| book_hsh['author'].eql?(author_str) }
+    def request_books_by_author(author_str)
+      url = [@host, 'book', 'request', 'available'].join('/')
+      request_body = { author: author_str }.to_json
+      Faraday.post(url, request_body, "Content-Type" => "application/json")
     end
 
     def get_books_by_author_title(author_str, title_str)

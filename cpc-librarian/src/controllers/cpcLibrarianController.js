@@ -1,16 +1,22 @@
-import mongoose from 'mongoose';
-// import request from 'request';
-const request = require('request');
+const _ = require('lodash');
+const formidableMiddleware = require('express-formidable');
 const libraryHost = 'http://localhost:4001';
+import mongoose from 'mongoose';
+const request = require('request');
 
 function logRequest(req, description) {
   console.log("\n" + "REQUEST: " + description);
   console.log("METHOD AND URL: " + req.method + ' ' + req.url + "\n");
   console.log("BODY:");
-  console.log(req.body);
+  console.log(req.fields);
   console.log("HEADERS:");
   console.log(req.headers);
   console.log("\n-------------------\n");
+}
+
+function logResponse(packagedResponse, description) {
+  console.log("\n" + "RESPONSE: " + description);
+  console.log(packagedResponse);
 }
 
 export const getBooks = (req, res) => {
@@ -38,30 +44,27 @@ export const getBookWithID = (req, res) => {
   });
 }
 
-export const getBooksByAuthor = (req, res) => {
-  logRequest(req, 'getBooksByAuthor');
+export const requestBooksByAuthor = (req, res) => {
+  logRequest(req, 'requestBooksByAuthor');
+
   const getBooksOptions = {
     method: 'GET',
     url: [libraryHost, 'book'].join('/')
   };
 
-  function filterByAuthor(json_body) {
-    return {
-      "author": "Foo Bar III",
-      "title": "Hello, World!"
-    }
+  function filterByAuthor(hsh_ary, author_str) {
+    return _.filter(hsh_ary, { 'author': author_str });
   }
 
   request(getBooksOptions, (err, apiResponse, body) => {
     if (err) {
       console.log(err);
     } else {
-      filterByAuthor(JSON.parse(body));
+      var booksByAuthor = filterByAuthor(JSON.parse(body), req.fields['author']);
+      logResponse(booksByAuthor, `Books by the author: ${req.fields['author']} \n`);
+      res.send(booksByAuthor);
     }
   });
-
-
-
 }
 
 // export const updateBook = ( req, res ) => {

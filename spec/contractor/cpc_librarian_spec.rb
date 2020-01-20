@@ -21,49 +21,38 @@ RSpec.describe Contractor::CpcLibrarian do
 
     it 'should GET root page' do
       res = subject.get_root
-      expect(res.code).to eq(200)
+      expect(res.status).to eq(200)
       expect(res.body).to eq("Welcome to the CPC Librarian on MongoDB, available at Port #{port}")
       expect(res.headers['x-powered-by']).to eq('Express')
     end
 
     it 'should GET all the books in the CPCLibrarian collection' do
       res = subject.get_all_books
-      expect(res.code).to eq(200)
-      expect(res.body[0]['title']).to eq(new_book_hsh[:title])
-      expect(res.body[0]['author']).to eq(new_book_hsh[:author])
-      expect(res.body.length).to eq(8)
+      expect(res.status).to eq(200)
+      expect(JSON.parse(res.body)[0]['title']).to eq(new_book_hsh[:title])
+      expect(JSON.parse(res.body)[0]['author']).to eq(new_book_hsh[:author])
+      expect(JSON.parse(res.body).length).to eq(8)
     end
 
     it 'should GET book by ID' do
-      first_book_hsh = subject.get_all_books.body[0]
+      first_book_hsh = JSON.parse(subject.get_all_books.body)[0]
       bookID_str = first_book_hsh['_id']
       title = first_book_hsh['title']
       author = first_book_hsh['author']
       res = subject.get_book_by_id(bookID_str)
-      expect(res.code).to eq(200)
-      expect(res.body['title']).to eq(title)
-      expect(res.body['author']).to eq(author)
+      expect(res.status).to eq(200)
+      expect(JSON.parse(res.body)['title']).to eq(title)
+      expect(JSON.parse(res.body)['author']).to eq(author)
     end
 
-    # it 'should GET books by author' do
-    #   res1 = subject.get_books_by_author('Foo Bar III')
-    #   res2 = subject.get_books_by_author('Hamish MacDonald')
-    #   res3 = subject.get_books_by_author('D. B. C. Quell')
-    #
-    #   res1a = subject.get_books_by_author_a('Foo Bar III')
-    #   res2a = subject.get_books_by_author_a('Hamish MacDonald')
-    #   res3a = subject.get_books_by_author_a('D. B. C. Quell')
-    #
-    #   expect(res1).to eq(res1a)
-    #   expect(res2).to eq(res2a)
-    #   expect(res3).to eq(res3a)
-    #   #
-    #   # expect(res1.count).to eq(6)
-    #   # expect(res2.count).to eq(1)
-    #   # expect(res3.count).to eq(1)
-    #
-    #
-    # end
+    it 'should GET books by author' do
+      author_str = 'D. B. C. Quell'
+      res = subject.request_books_by_author('D. B. C. Quell')
+      body = JSON.parse(res.body)[0]
+      expect(res.status).to eq(200)
+      expect(body['title']).to eq("Make Mongo, Not SQL!")
+      expect(body['author']).to eq(author_str)
+    end
     #
     # it 'should GET books by author and title' do
     #   author_str = 'Foo Bar III'
@@ -91,9 +80,9 @@ RSpec.describe Contractor::CpcLibrarian do
 
     # it 'should POST a new book to the CpcLibrarian collection' do
     #   res = subject.post_book(new_book_hsh)
-    #   expect(res.code).to eq(200)
-    #   expect(res.body['title']).to eq(new_book_hsh[:title])
-    #   expect(res.body['author']).to eq(new_book_hsh[:author])
+    #   expect(res.status).to eq(200)
+    #   expect(JSON.parse(res.body)['title']).to eq(new_book_hsh[:title])
+    #   expect(JSON.parse(res.body)['author']).to eq(new_book_hsh[:author])
     # end
     #
     # it 'should POST a collection of new books from JSON' do
@@ -113,8 +102,8 @@ RSpec.describe Contractor::CpcLibrarian do
     #   id_to_delete = deletable_ids.last
     #
     #   res = subject.delete_latest_book(protected_id_ary)
-    #   expect(res.code).to eq(200)
-    #   expect(res.body['id']).to eq(id_to_delete)
+    #   expect(res.status).to eq(200)
+    #   expect(JSON.parse(res.body)['id']).to eq(id_to_delete)
     #   expect(subject.get_all_books.body.count).to eq(all_books.count - 1)
     # end
 
@@ -124,9 +113,9 @@ RSpec.describe Contractor::CpcLibrarian do
     #   bookID_str = subject.get_latest_book['_id']
     #   res = subject.get_book_by_id(bookID_str)
     #   expect(res.headers['x-powered-by']).to eq('Express')
-    #   expect(res.body['_id']).to eq(bookID_str)
-    #   expect(res.body['title']).to eq(last_book_hsh['title'])
-    #   expect(res.body['author']).to eq(last_book_hsh['author'])
+    #   expect(JSON.parse(res.body)['_id']).to eq(bookID_str)
+    #   expect(JSON.parse(res.body)['title']).to eq(last_book_hsh['title'])
+    #   expect(JSON.parse(res.body)['author']).to eq(last_book_hsh['author'])
     # end
     #
     #
@@ -144,9 +133,9 @@ RSpec.describe Contractor::CpcLibrarian do
     #
     #   res = subject.put_book(book_hsh)
     #   expect(res.headers['x-powered-by']).to eq('Express')
-    #   expect(res.body['_id']).to eq(bookID_str)
-    #   expect(res.body['title']).to eq(book_hsh[:title])
-    #   expect(res.body['author']).to eq(book_hsh[:author])
+    #   expect(JSON.parse(res.body)['_id']).to eq(bookID_str)
+    #   expect(JSON.parse(res.body)['title']).to eq(book_hsh[:title])
+    #   expect(JSON.parse(res.body)['author']).to eq(book_hsh[:author])
     #
     #   puts "Title after PUT: #{subject.get_latest_book['title']}"
     # end

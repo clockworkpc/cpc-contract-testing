@@ -166,6 +166,7 @@ DEPENDENCIES
   contractor!
   cpc!
   facets
+  faraday
   guard
   guard-rspec
   guard-rubocop
