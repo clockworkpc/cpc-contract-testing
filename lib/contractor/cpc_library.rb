@@ -74,5 +74,11 @@ module Contractor
       }
       api_put_request(args_hsh)
     end
+
+    # def get_books_by_author(author_str)
+    #   book_hsh_ary = get_all_books
+    #   book_hsh_ary.body.select { |book_hsh| book_hsh['author'].eql?(author_str) }
+    # end
+
   end
 end

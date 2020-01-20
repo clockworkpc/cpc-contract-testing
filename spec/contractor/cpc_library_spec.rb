@@ -44,7 +44,7 @@ RSpec.describe Contractor::CpcLibrary do
       expect(res.code).to eq(200)
       expect(res.body[0]['title']).to eq(new_book_hsh[:title])
       expect(res.body[0]['author']).to eq(new_book_hsh[:author])
-      expect(res.body.count).to eq(7)
+      expect(res.body.count).to eq(9)
     end
 
     it 'should DELETE the latest book in the collection' do
@@ -91,5 +91,10 @@ RSpec.describe Contractor::CpcLibrary do
 
       puts "Title after PUT: #{subject.get_latest_book['title']}"
     end
+
+    # it 'should get books by author' do
+    #   author_str = 'Hamish MacDonald'
+    #   res = subject.get_books_by_author(author_str)
+    # end
   end
 end

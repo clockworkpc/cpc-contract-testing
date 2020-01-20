@@ -10,16 +10,20 @@ export const BookSchema = new Schema( {
     type: String,
     required: 'Enter the name of the author'
   },
-  checkedIn: {
+  checkedInDate: {
     type: Date,
     default: Date.now
   },
-  checkoutOut: {
+  checkoutOutDate: {
     type: Date,
     default: null
   },
   returnDate: {
     type: Date,
     default: null
+  },
+  available: {
+    type: Boolean,
+    default: true
   }
 } );

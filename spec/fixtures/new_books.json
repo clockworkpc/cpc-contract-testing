@@ -1,6 +1,18 @@
 [
   {
     "title": "Hello, World!",
+    "author": "Foo Bar III",
+    "checkedInDate": null,
+    "available": false
+  },
+  {
+    "title": "Hello, World!",
+    "author": "Foo Bar III",
+    "checkedInDate": null,
+    "available": false
+  },
+  {
+    "title": "Hello, World!",
     "author": "Foo Bar III"
   },
   {

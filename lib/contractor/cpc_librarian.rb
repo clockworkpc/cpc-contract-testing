@@ -23,6 +23,41 @@ module Contractor
       args_hsh = { url: { host: @host, path: 'book', _id: bookID_str } }
       api_get_request(args_hsh)
     end
+
+    def get_books_by_author_a(author_str)
+      book_hsh_ary = get_all_books
+      book_hsh_ary.body.select { |book_hsh| book_hsh['author'].eql?(author_str) }
+    end
+
+    def get_books_by_author(author_str)
+      args_hsh = {
+        url: { host: @host, path: 'book', action: 'request', type: 'available' },
+        request_body: { author: author_str }
+      }
+
+      api_get_request(args_hsh).body
+      #
+      #
+      #
+      #
+      # book_hsh_ary = get_all_books
+      # book_hsh_ary.body.select { |book_hsh| book_hsh['author'].eql?(author_str) }
+    end
+
+    def get_books_by_author_title(author_str, title_str)
+      book_hsh_ary = get_books_by_author(author_str)
+      book_hsh_ary.select { |book_hsh| book_hsh['title'].eql?(title_str) }
+    end
+
+    def get_available_books_by_author_title(author_str, title_str)
+      book_hsh_ary = get_books_by_author_title(author_str, title_str)
+      book_hsh_ary.select { |book_hsh| book_hsh['available'] == true }
+    end
+
+    def get_first_available_book_by_author_title(author_str, title_str)
+      get_available_books_by_author_title(author_str, title_str)[0]
+    end
+
     #
     # def get_latest_book
     #   all_books = get_all_books.body.last

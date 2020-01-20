@@ -31,7 +31,7 @@ RSpec.describe Contractor::CpcLibrarian do
       expect(res.code).to eq(200)
       expect(res.body[0]['title']).to eq(new_book_hsh[:title])
       expect(res.body[0]['author']).to eq(new_book_hsh[:author])
-      expect(res.body.length).to eq(6)
+      expect(res.body.length).to eq(8)
     end
 
     it 'should GET book by ID' do
@@ -43,8 +43,50 @@ RSpec.describe Contractor::CpcLibrarian do
       expect(res.code).to eq(200)
       expect(res.body['title']).to eq(title)
       expect(res.body['author']).to eq(author)
-      puts res.body
     end
+
+    # it 'should GET books by author' do
+    #   res1 = subject.get_books_by_author('Foo Bar III')
+    #   res2 = subject.get_books_by_author('Hamish MacDonald')
+    #   res3 = subject.get_books_by_author('D. B. C. Quell')
+    #
+    #   res1a = subject.get_books_by_author_a('Foo Bar III')
+    #   res2a = subject.get_books_by_author_a('Hamish MacDonald')
+    #   res3a = subject.get_books_by_author_a('D. B. C. Quell')
+    #
+    #   expect(res1).to eq(res1a)
+    #   expect(res2).to eq(res2a)
+    #   expect(res3).to eq(res3a)
+    #   #
+    #   # expect(res1.count).to eq(6)
+    #   # expect(res2.count).to eq(1)
+    #   # expect(res3.count).to eq(1)
+    #
+    #
+    # end
+    #
+    # it 'should GET books by author and title' do
+    #   author_str = 'Foo Bar III'
+    #   title_str = 'Hello, World!'
+    #   res = subject.get_books_by_author_title(author_str, title_str)
+    #   expect(res.count).to eq(3)
+    # end
+    #
+    # it "should GET available books by author and title" do
+    #   author_str = 'Foo Bar III'
+    #   title_str = 'Hello, World!'
+    #   res = subject.get_available_books_by_author_title(author_str, title_str)
+    #   expect(res.count).to eq(1)
+    # end
+    #
+    # it "should GET first available book by author and title" do
+    #   author_str = 'Foo Bar III'
+    #   title_str = 'Hello, World!'
+    #   res = subject.get_first_available_book_by_author_title(author_str, title_str)
+    #   puts res
+    #   expect(res['author']).to eq(author_str)
+    #   expect(res['title']).to eq(title_str)
+    # end
 
 
     # it 'should POST a new book to the CpcLibrarian collection' do

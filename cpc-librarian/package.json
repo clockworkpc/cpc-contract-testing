@@ -1,10 +1,10 @@
 {
-  "name": "crm",
+  "name": "cpc-librarian",
   "version": "1.0.0",
-  "description": "CRM",
+  "description": "CPC Librarian",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js",
+    "start": "nodemon --verbose ./index.js --exec babel-node -e js",
     "test": "mocha"
   },
   "repository": {
