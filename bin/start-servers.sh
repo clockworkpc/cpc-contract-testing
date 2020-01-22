@@ -28,3 +28,4 @@ gnome-terminal --working-directory="$PWD/cpc-librarian" --title="CPC-LIBRARIAN" 
 gnome-terminal --working-directory="$PWD/cpc-library" --title="CPC-LIBRARY" -- npm start
 # Start cpc-librarian server
 gnome-terminal --working-directory="$PWD/cpc-librarian" --title="CPC-LIBRARIAN" -- npm start
+atom .

@@ -8,7 +8,7 @@ RSpec.describe Contractor::CpcLibrarian do
   context 'on Port 4002', online: true do
     url = 'http://localhost'
     port = 4002
-    subject = Contractor::CpcLibrarian.new(url, port)
+    subject = Contractor::CpcBibliotheque.new(url, port)
 
     # before(:all) do
     #   subject.delete_all_books
@@ -24,6 +24,10 @@ RSpec.describe Contractor::CpcLibrarian do
       expect(res.status).to eq(200)
       expect(res.body).to eq("Welcome to the CPC Librarian on MongoDB, available at Port #{port}")
       expect(res.headers['x-powered-by']).to eq('Express')
+    end
+
+    it "should" do
+
     end
 
     it 'should GET all the books in the CPCLibrarian collection' do
@@ -53,23 +57,6 @@ RSpec.describe Contractor::CpcLibrarian do
       expect(body['title']).to eq("Make Mongo, Not SQL!")
       expect(body['author']).to eq(author_str)
     end
-
-    it 'should GET books by author (mocked)' do
-      author_str = 'D. B. C. Quell'
-      res = double("res", :status => 200, :body => [
-        {
-          'title' => "Make Mongo, Not SQL!",
-          'author' => author_str
-          }
-        ]
-      )
-      # res = subject.request_books_by_author('D. B. C. Quell')
-      body = res.body[0]
-      expect(res.status).to eq(200)
-      expect(body['title']).to eq("Make Mongo, Not SQL!")
-      expect(body['author']).to eq(author_str)
-    end
-
     #
     # it 'should GET books by author and title' do
     #   author_str = 'Foo Bar III'
